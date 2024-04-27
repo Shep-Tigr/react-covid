@@ -23,6 +23,10 @@
   box-sizing: border-box;
 }
 
+.red-background {
+  background-color: red;
+}
+
 .btn {
   width: 250px;
   padding: 10px 20px;
