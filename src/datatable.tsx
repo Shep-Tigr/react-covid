@@ -194,16 +194,16 @@ const CovidDati: React.FC = () => {
             data: Object.values(groupedData).map((data) => data.totalCases),
             borderColor: 'rgba(75, 192, 192, 1)',
             backgroundColor: 'rgba(75, 192, 192, 0.2)',
-            tension: 0, // Set tension to 0
-            pointRadius: 0, // Set point radius to 0
+            tension: 0,
+            pointRadius: 0,
           },
           {
             label: 'Nāves',
             data: Object.values(groupedData).map((data) => data.totalDeaths),
             borderColor: 'rgba(255, 99, 132, 1)',
             backgroundColor: 'rgba(255, 99, 132, 0.2)',
-            tension: 0, // Set tension to 0
-            pointRadius: 0, // Set point radius to 0
+            tension: 0,
+            pointRadius: 0,
           },
         ],
       };
