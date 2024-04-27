@@ -31,16 +31,10 @@
   width: 250px;
   padding: 10px 20px;
   margin-right: 10px;
-  cursor: pointer;
-  border: none;
-  border-radius: 5px;
-  background-color: #007bff;
-  color: #fff;
+  background-color: #c4d2e7 !important;
+  color: #000000 !important;
 }
 
-.btn-primary {
-  background-color: #007bff;
-}
 
 .mekletvalsti {
   margin-top: 10px;
@@ -50,6 +44,14 @@
   display: block;
   margin-bottom: 5px;
 }
+
+
+.react-tabs__tab--selected {
+  background-color: #c4d2e7 !important;
+  color: white;
+}
+
+
 
 .mekletvalsti input[type="text"],
 .mekletvalsti select {
