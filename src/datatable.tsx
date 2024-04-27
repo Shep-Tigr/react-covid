@@ -322,28 +322,43 @@ const CovidDati: React.FC = () => {
   rowData.filter((record) => {
   });
   const filteredRowData = rowData.filter((record) => {
+
+
     const countryMatches = record.countriesAndTerritories.toLowerCase().includes(searchQuery.toLowerCase());
+
+
     const pirmaVertibaValue = pirmaVertiba.trim() === '' ? -Infinity : parseFloat(pirmaVertiba);
+
+
     const otraVertibaValue = otraVertiba.trim() === '' ? Infinity : parseFloat(otraVertiba);
 
+
     let dropdownItemInRange = true;
+    
 
     if (DropDownItem === 'Gadījumu skaits') {
         dropdownItemInRange = record.cases >= pirmaVertibaValue && record.cases <= otraVertibaValue;
     }
+
+
     if (DropDownItem === 'Nāves gadījumu skaits') {
         dropdownItemInRange = record.deaths >= pirmaVertibaValue && record.deaths <= otraVertibaValue;
     }
+
+
     if (DropDownItem === 'Nāves gadījumi kopā(Viss Laiks)') {
         const countryName = record.countriesAndTerritories;
         const countryDeaths = countryData && countryData[countryName] ? countryData[countryName].totalDeaths : 0;
         dropdownItemInRange = countryDeaths >= pirmaVertibaValue && countryDeaths <= otraVertibaValue;
     }
+
+
     if (DropDownItem === 'Gadījumu skaits kopā(Viss Laiks)') {
       const countryName = record.countriesAndTerritories;
       const countryCases = countryData && countryData[countryName] ? countryData[countryName].totalCases : 0;
       dropdownItemInRange = countryCases >= pirmaVertibaValue && countryCases <= otraVertibaValue;
     }
+
 
     return countryMatches && dropdownItemInRange;
 });
