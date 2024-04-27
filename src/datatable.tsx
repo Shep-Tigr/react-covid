@@ -133,7 +133,7 @@ const CovidDati: React.FC = () => {
   
       const data = await response.json();
   
-      const tempCountryData: Record<string, { totalCases: number; totalDeaths: number; casesPer1000?: number; deathsPer1000?: number }> = {};
+      const tempCountryData: Record<string, {populat: number; totalCases: number; totalDeaths: number; casesPer1000?: number; deathsPer1000?: number }> = {};
   
 
       const records = data.records as {
@@ -149,21 +149,21 @@ const CovidDati: React.FC = () => {
       records.forEach((record) => {
         const { countriesAndTerritories, cases, deaths, popData2019 } = record;
         if (!tempCountryData[countriesAndTerritories]) {
-          tempCountryData[countriesAndTerritories] = { totalCases: 0, totalDeaths: 0 };
+          tempCountryData[countriesAndTerritories] = {populat: 0, totalCases: 0, totalDeaths: 0 };
         }
+
+        
         tempCountryData[countriesAndTerritories].totalCases += parseInt(cases);
         tempCountryData[countriesAndTerritories].totalDeaths += parseInt(deaths);
-  
-        const population = parseInt(popData2019);
-        if (population) {
-          tempCountryData[countriesAndTerritories].casesPer1000 = (parseInt(cases) / population) * 1000;
-          tempCountryData[countriesAndTerritories].deathsPer1000 = (parseInt(deaths) / population) * 1000;
-          
-        }
+        tempCountryData[countriesAndTerritories].populat = parseInt(popData2019);
+        tempCountryData[countriesAndTerritories].casesPer1000 = (tempCountryData[countriesAndTerritories].totalCases / parseInt(popData2019)) * 1000;
+        tempCountryData[countriesAndTerritories].deathsPer1000 = (tempCountryData[countriesAndTerritories].totalDeaths / parseInt(popData2019)) * 1000;
+
       });
   
-  
+      
       setCountryData(tempCountryData);
+      console.log(tempCountryData)
   
       const filteredData = data.records.filter((record: { dateRep: string }) => {
         const dateRep = new Date(record.dateRep);
@@ -290,8 +290,6 @@ const CovidDati: React.FC = () => {
   
   const columnNames = columnDefs
   .filter(column => column.headerName !== 'Valsts')
-  .filter(column => column.headerName !== 'Gadījumu skaits uz 1000 iedzīvotājiem')
-  .filter(column => column.headerName !== 'Nāves gadījumi uz 1000 iedzīvotājiem')
   .map(column => column.headerName);
 
 
@@ -321,7 +319,7 @@ const CovidDati: React.FC = () => {
     setDropDownItem(e.target.value);
   };
 
-  
+
   rowData.filter((record) => {
   });
 
@@ -363,6 +361,28 @@ const CovidDati: React.FC = () => {
       const countryName = record.countriesAndTerritories;
       const countryCases = countryData && countryData[countryName] ? countryData[countryName].totalCases : 0;
       dropdownItemInRange = countryCases >= pirmaVertibaValue && countryCases <= otraVertibaValue;
+    }
+
+    if (DropDownItem === 'Gadījumu skaits uz 1000 iedzīvotājiem') {
+      const countryName = record.countriesAndTerritories;
+      const countrycasesPer1000 = countryData && countryData[countryName] ? countryData[countryName].casesPer1000 : 0;
+      if (countrycasesPer1000 !== undefined) {
+        dropdownItemInRange = countrycasesPer1000 >= pirmaVertibaValue && countrycasesPer1000 <= otraVertibaValue;
+      } else {
+        dropdownItemInRange = false;
+      }
+    }
+    
+
+
+    if (DropDownItem === 'Nāves gadījumi uz 1000 iedzīvotājiem') {
+      const countryName = record.countriesAndTerritories;
+      const countrydeathsPer1000 = countryData && countryData[countryName] ? countryData[countryName].deathsPer1000 : 0;
+      if (countrydeathsPer1000 !== undefined) {
+        dropdownItemInRange = countrydeathsPer1000 >= pirmaVertibaValue && countrydeathsPer1000 <= otraVertibaValue;
+      } else {
+        dropdownItemInRange = false;
+      }
     }
 
 
