@@ -8,7 +8,7 @@ import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 import './datudizains.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'react-tabs/style/react-tabs.css'; // Import the default styles for react-tabs
+import 'react-tabs/style/react-tabs.css';
 
 
 const CovidDati: React.FC = () => {
@@ -31,7 +31,6 @@ const CovidDati: React.FC = () => {
     if (chartRef.current) {
       const ctx = chartRef.current.getContext('2d');
       if (ctx) {
-        // Destroy previous chart instance if it exists
         if (chartInstance.current) {
           chartInstance.current.destroy();
         }
@@ -60,8 +59,6 @@ const CovidDati: React.FC = () => {
         });
       }
     }
-  
-    // Cleanup function to destroy the chart instance
     return () => {
       if (chartInstance.current) {
         chartInstance.current.destroy();
@@ -81,7 +78,7 @@ const CovidDati: React.FC = () => {
     try {
       const response = await fetch('https://opendata.ecdc.europa.eu/covid19/casedistribution/json/');
       if (!response.ok) {
-        throw new Error('Failed to fetch data');
+        throw new Error('no data');
       }
       const data = await response.json();
 
@@ -114,7 +111,7 @@ const CovidDati: React.FC = () => {
         setMaxDateRange(maxDate.toISOString().slice(0, 10));
       }
     } catch (error) {
-      console.error('Error fetching dates:', error);
+      console.error('no dates:', error);
     }
   };
 
@@ -130,7 +127,7 @@ const CovidDati: React.FC = () => {
       const response = await fetch('https://opendata.ecdc.europa.eu/covid19/casedistribution/json/');
   
       if (!response.ok) {
-        throw new Error('Failed to fetch data');
+        throw new Error('no data');
       }
   
       const data = await response.json();
@@ -209,21 +206,8 @@ const CovidDati: React.FC = () => {
           },
         ],
       };
-      
-
-      
-      
-      
-      
-      
-      
-
-  
       setChartData(chartData);
-
-  
       setRowData(filteredData);
-  
       setLoading(false);
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -365,8 +349,6 @@ const CovidDati: React.FC = () => {
 });
 
 
-
-
 const clearInputs = () => {
   setPirmaVertiba('');
   setOtraVertiba('');
@@ -376,8 +358,9 @@ const clearInputs = () => {
 
 
   const inputOneClass = pirmaVertiba && isNaN(Number(pirmaVertiba)) ? 'red-background' : '';
-  const inputTwoClass = otraVertiba && isNaN(Number(otraVertiba)) ? 'red-background' : '';
 
+
+  const inputTwoClass = otraVertiba && isNaN(Number(otraVertiba)) ? 'red-background' : '';
   
 
   return (
