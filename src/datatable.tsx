@@ -68,7 +68,6 @@ const CovidDati: React.FC = () => {
   }, []);
   
   
-  
 
   useEffect(() => {
     fetchDates();
@@ -321,8 +320,13 @@ const CovidDati: React.FC = () => {
   const handleDropDownItem = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setDropDownItem(e.target.value);
   };
+
+  
   rowData.filter((record) => {
   });
+
+
+
   const filteredRowData = rowData.filter((record) => {
 
 
@@ -374,10 +378,10 @@ const clearInputs = () => {
 };
 
 
-  const inputOneClass = pirmaVertiba && isNaN(Number(pirmaVertiba)) ? 'red-background' : '';
+const inputOneClass = pirmaVertiba && isNaN(Number(pirmaVertiba)) ? 'red-background' : '';
 
 
-  const inputTwoClass = otraVertiba && isNaN(Number(otraVertiba)) ? 'red-background' : '';
+const inputTwoClass = otraVertiba && isNaN(Number(otraVertiba)) ? 'red-background' : '';
   
 
   return (
