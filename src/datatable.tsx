@@ -405,17 +405,16 @@ const clearInputs = () => {
 };
 
 
-const inputOneClass = pirmaVertiba && isNaN(Number(pirmaVertiba)) ? 'red-background' : '';
+const inputOneClass = pirmaVertiba && isNaN(Number(pirmaVertiba)) ? `red-background ${themeClass}` : '';
+const inputTwoClass = otraVertiba && isNaN(Number(otraVertiba)) ? `red-background ${themeClass}` : '';
 
-
-const inputTwoClass = otraVertiba && isNaN(Number(otraVertiba)) ? 'red-background' : '';
   
 
   return (
     <body className={themeClass}>
       <div className={`container ${themeClass}`}>
 
-        <div>
+        <div className={`themeselect ${themeClass}`}>
           <select value={theme} onChange={(e) => toggleTheme(e.target.value as 'light' | 'dark')}>
             <option value="light">Light Theme</option>
             <option value="dark">Dark Theme</option>
@@ -431,7 +430,7 @@ const inputTwoClass = otraVertiba && isNaN(Number(otraVertiba)) ? 'red-backgroun
             onChange={handleFromDateChange}
             min={minDateRange}
             max={maxDateRange}
-            className="Datums"
+            className={`Datums ${themeClass}`}
           />
         </div>
 
@@ -444,9 +443,9 @@ const inputTwoClass = otraVertiba && isNaN(Number(otraVertiba)) ? 'red-backgroun
             onChange={handleToDateChange}
             min={minDateRange}
             max={maxDateRange}
-            className="Datums"
+            className={`Datums ${themeClass}`}
           />
-          <button className="btn btn-primary" onClick={fetchDates}>
+          <button className={`btn btn-primary ${themeClass}`} onClick={fetchDates}>
             Reset Dates
           </button>
         </div>
@@ -458,7 +457,7 @@ const inputTwoClass = otraVertiba && isNaN(Number(otraVertiba)) ? 'red-backgroun
           </TabList>
 
           <TabPanel>
-              <div className="mekletvalsti">
+              <div className={`mekletvalsti ${themeClass}`}>
                 <label htmlFor="search">Meklēt pēc Valsts:</label>
                 <input
                   id="search"
@@ -497,7 +496,7 @@ const inputTwoClass = otraVertiba && isNaN(Number(otraVertiba)) ? 'red-backgroun
                   onChange={handleOtraVertiba}
                   className={inputTwoClass}
                 />
-                <button className="btn btn-primary" onClick={fetchData}>
+                <button className={`btn btn-primary ${themeClass}`} onClick={fetchData}>
                   Notirit visus filtrus
                 </button>
               </div>

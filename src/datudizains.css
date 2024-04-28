@@ -4,6 +4,9 @@ body {
   min-height: 100% !important;
 }
 
+
+
+
 .multiline-header {
   white-space: normal;
   line-height: normal;
@@ -15,7 +18,17 @@ body {
   
 }
 
+.themeselect {
+  justify-content: flex-end;
+  display: flex;
+}
+
+.react-tabs__tab-list {
+  padding-top: 15px !important;
+}
+
 .container {
+  padding-top: 50px;
   padding: 20px;
   max-width: 600px;
   min-height: 1500px;
@@ -30,16 +43,14 @@ body {
   box-sizing: border-box;
 }
 
-.red-background {
-  background-color: red;
-}
 
 .btn {
   width: 250px;
   padding: 10px 20px;
   margin-right: 10px;
-  background-color: #c4d2e7 !important;
-  color: #000000 !important;
+  background-color: #377fec !important;
+  color: #ffffff !important;
+  border-radius: 50px !important;
 }
 
 
@@ -63,6 +74,7 @@ body {
 .mekletvalsti input[type="text"],
 .mekletvalsti select {
   width: 30%;
+  height: 50px;
   padding: 8px;
   margin-bottom: 10px;
   margin-right: 10px;
@@ -98,10 +110,13 @@ body.dark-theme {
 }
 
 
+
 .container.dark-theme {
   background-color: #19181b !important;
   color: #ffffff;
 }
+
+
 
 
 body.light-theme {
@@ -115,3 +130,47 @@ body.light-theme {
   color: #000000;
 }
 
+
+
+
+.mekletvalsti.dark-theme input[type="text"],
+.mekletvalsti.dark-theme select {
+  background-color: #111012;
+  color: #c4d2e7;
+  border: 1px solid;
+  border-color: #000000;
+}
+
+
+.red-background.dark-theme {
+  background-color: rgb(100, 5, 5) !important;
+}
+
+
+
+.red-background.light-theme {
+  background-color: rgb(170, 16, 16) !important;
+}
+
+.Datums.dark-theme {
+  background-color: #111012;
+  color: #c4d2e7;
+  border: 1px solid;
+  border-color: #000000;
+}
+
+
+.btn.dark-theme {
+  background-color: #28272B!important;
+  color: #c4d2e7 !important;
+  border: 1px solid;
+  border-color: #0C0B0D;
+}
+
+.themeselect.dark-theme select {
+  background-color: #111012;
+  color: #c4d2e7;
+  border: 1px solid;
+  border-color: #000000;
+  border-radius: 5px ;
+}
