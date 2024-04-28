@@ -12,6 +12,7 @@ import 'react-tabs/style/react-tabs.css';
 
 
 const CovidDati: React.FC = () => {
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
   const [minDateRange, setMinDateRange] = useState<string>('');
   const [maxDateRange, setMaxDateRange] = useState<string>('');
   const [fromDate, setFromDate] = useState<string>('');
@@ -319,6 +320,12 @@ const CovidDati: React.FC = () => {
     setDropDownItem(e.target.value);
   };
 
+  const toggleTheme = (selectedTheme: 'light' | 'dark') => {
+    setTheme(selectedTheme);
+  };
+
+  const themeClass = theme === 'dark' ? 'dark-theme' : 'light-theme';
+
 
   rowData.filter((record) => {
   });
@@ -405,105 +412,115 @@ const inputTwoClass = otraVertiba && isNaN(Number(otraVertiba)) ? 'red-backgroun
   
 
   return (
-    <div className="container">
-      <div>
-        <label>No Perioda</label>
-        <input
-          id="fromDate"
-          type="date"
-          value={fromDate}
-          onChange={handleFromDateChange}
-          min={minDateRange}
-          max={maxDateRange}
-          className="Datums"
-        />
-      </div>
-      <div>
-        <label>Līdz Periodam</label>
-        <input
-          id="toDate"
-          type="date"
-          value={toDate}
-          onChange={handleToDateChange}
-          min={minDateRange}
-          max={maxDateRange}
-          className="Datums"
-        />
-        <button className="btn btn-primary" onClick={fetchDates}>
-          Reset Dates
-        </button>
-      </div>
+    <body className={themeClass}>
+      <div className={`container ${themeClass}`}>
 
-      <Tabs>
-        <TabList>
-          <Tab>Tabula</Tab>
-          <Tab>Grafiks</Tab>
-        </TabList>
-
-        <TabPanel>
-            <div className="mekletvalsti">
-            <label htmlFor="search">Meklēt pēc Valsts:</label>
-            <input
-              id="search"
-              type="text"
-              value={searchQuery}
-              onChange={handleSearchInputChange}
-            />
-            <label htmlFor="search">Filtrēt Pēc Lauka:</label>
-
-            <select
-              id="search"
-              value={DropDownItem}
-              onChange={handleDropDownItem}
-            >
-              <option value="">Izvēlieties lauku</option>
-              {columnNames.map((columnName, index) => (
-                <option key={index} value={columnName}>
-                  {columnName}
-                </option>
-              ))}
-            </select>
-
-            <label htmlFor="VertibaViens">Minimālā vērtība:</label>
-            <input
-              id="VertibaViens"
-              type="text"
-              value={pirmaVertiba}
-              onChange={handlePirmaVertiba}
-              className={inputOneClass}
-            />
-            <label htmlFor="VertibaDivi">Maksimālā vērtība:</label>
-            <input
-              id="VertibaDivi"
-              type="text"
-              value={otraVertiba}
-              onChange={handleOtraVertiba}
-              className={inputTwoClass}
-            />
-            <button className="btn btn-primary" onClick={fetchData}>
-              Notirit visus filtrus
-            </button>
-            </div>
-          <div className="ag-theme-alpine" style={{ height: '1000px', width: '100%' }}>
-            <AgGridReact
-              gridOptions={gridOptions}
-              columnDefs={columnDefs}
-              rowData={filteredRowData}
-              pagination={true}
-              paginationPageSizeSelector={[50, 100, 200, 500, 1000]}
-              paginationPageSize={100}
-            />
-          </div>
-        </TabPanel>
-
-        <TabPanel>
         <div>
-            <Line data={chartData} />
+          <select value={theme} onChange={(e) => toggleTheme(e.target.value as 'light' | 'dark')}>
+            <option value="light">Light Theme</option>
+            <option value="dark">Dark Theme</option>
+          </select>
         </div>
-        </TabPanel>
 
-      </Tabs>
-    </div>
+        <div>
+          <label>No Perioda</label>
+          <input
+            id="fromDate"
+            type="date"
+            value={fromDate}
+            onChange={handleFromDateChange}
+            min={minDateRange}
+            max={maxDateRange}
+            className="Datums"
+          />
+        </div>
+
+        <div>
+          <label>Līdz Periodam</label>
+          <input
+            id="toDate"
+            type="date"
+            value={toDate}
+            onChange={handleToDateChange}
+            min={minDateRange}
+            max={maxDateRange}
+            className="Datums"
+          />
+          <button className="btn btn-primary" onClick={fetchDates}>
+            Reset Dates
+          </button>
+        </div>
+
+        <Tabs>
+          <TabList>
+            <Tab>Tabula</Tab>
+            <Tab>Grafiks</Tab>
+          </TabList>
+
+          <TabPanel>
+              <div className="mekletvalsti">
+                <label htmlFor="search">Meklēt pēc Valsts:</label>
+                <input
+                  id="search"
+                  type="text"
+                  value={searchQuery}
+                  onChange={handleSearchInputChange}
+                />
+                <label htmlFor="search">Filtrēt Pēc Lauka:</label>
+
+                <select
+                  id="search"
+                  value={DropDownItem}
+                  onChange={handleDropDownItem}
+                >
+                  <option value="">Izvēlieties lauku</option>
+                  {columnNames.map((columnName, index) => (
+                    <option key={index} value={columnName}>
+                      {columnName}
+                    </option>
+                  ))}
+                </select>
+
+                <label htmlFor="VertibaViens">Minimālā vērtība:</label>
+                <input
+                  id="VertibaViens"
+                  type="text"
+                  value={pirmaVertiba}
+                  onChange={handlePirmaVertiba}
+                  className={inputOneClass}
+                />
+                <label htmlFor="VertibaDivi">Maksimālā vērtība:</label>
+                <input
+                  id="VertibaDivi"
+                  type="text"
+                  value={otraVertiba}
+                  onChange={handleOtraVertiba}
+                  className={inputTwoClass}
+                />
+                <button className="btn btn-primary" onClick={fetchData}>
+                  Notirit visus filtrus
+                </button>
+              </div>
+            <div className={`ag-theme-alpine ${theme === 'dark' ? 'ag-theme-alpine-dark' : ''}`} style={{ height: '1000px', width: '100%' }}>
+              <AgGridReact
+                gridOptions={gridOptions}
+                columnDefs={columnDefs}
+                rowData={filteredRowData}
+                pagination={true}
+                paginationPageSizeSelector={[50, 100, 200, 500, 1000]}
+                paginationPageSize={100}
+              />
+            </div>
+          </TabPanel>
+
+          <TabPanel>
+          <div>
+              <Line data={chartData} />
+          </div>
+          </TabPanel>
+        </Tabs>
+      </div>
+    </body>
   );
   
   

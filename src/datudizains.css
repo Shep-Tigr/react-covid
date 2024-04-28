@@ -1,3 +1,9 @@
+
+body {
+  min-width: 100%;
+  min-height: 100% !important;
+}
+
 .multiline-header {
   white-space: normal;
   line-height: normal;
@@ -12,6 +18,7 @@
 .container {
   padding: 20px;
   max-width: 600px;
+  min-height: 1200px;
   margin: 0 auto;
 }
 
@@ -82,3 +89,29 @@ label {
     margin-top: 10px;
   }
 }
+
+
+
+body.dark-theme {
+  background-color: #000000f5;
+  color: #ffffff;
+}
+
+
+.container.dark-theme {
+  background-color: #19181b !important;
+  color: #ffffff;
+}
+
+
+body.light-theme {
+  background-color: #cbc9ddc4 !important;
+  color: #ffffff;
+}
+
+
+.container.light-theme {
+  background-color: #ffffff81 !important;
+  color: #000000;
+}
+
